@@ -1,18 +1,11 @@
 import { FileSearchOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined } from '@ant-design/icons';
 import { Breadcrumb, Button, Dropdown, Layout, Menu, type MenuProps, type SiderProps } from 'antd';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { json, Link, Outlet, useLoaderData, useNavigate, type LoaderFunctionArgs } from 'react-router-dom';
 import { createRelativeBreadcrumbs, getPathFromRequest, segmentPaths } from '~/utils/request';
 import { stripLeadingSlash } from '~/utils/string';
 
 const { Header, Content, Sider } = Layout;
-
-const settingsItems: MenuProps['items'] = [
-    {
-        key: `login`,
-        label: `Login`,
-    },
-];
 
 type LayoutLoaderData = {
     breadcrumbs: ReturnType<typeof createRelativeBreadcrumbs>;
@@ -28,7 +21,7 @@ export function layoutLoader(params: LoaderFunctionArgs) {
 export default function RootRoute() {
     const { breadcrumbs, path } = useLoaderData() as LayoutLoaderData;
     const { SiderMenu, SidemenuTrigger, contentMargin } = useSiderMenu({ path });
-
+    const { Settings } = useSettings();
     return (
         <Layout className='!min-h-screen !relative'>
             <Header
@@ -37,14 +30,7 @@ export default function RootRoute() {
             >
                 <nav className='flex gap-2 h-full justify-between items-center'>
                     <SidemenuTrigger />
-                    <Dropdown menu={{ items: settingsItems }} trigger={['click']}>
-                        <Button
-                            type='ghost'
-                            size='large'
-                            icon={<SettingOutlined />}
-                            className='flex justify-center items-center text-accent'
-                        />
-                    </Dropdown>
+                    <Settings />
                 </nav>
             </Header>
             <Layout>
@@ -70,6 +56,8 @@ type MenuItemProps = NonNullable<MenuProps['items']>[number] & { tabIndex?: stri
 
 function useSiderMenu({ path }: Pick<LayoutLoaderData, 'path'>) {
     const navigate = useNavigate();
+
+    const ref = useRef(null);
 
     const [collapsed, setCollapsed] = useState(false);
     const [broken, setBroken] = useState(false);
@@ -121,6 +109,7 @@ function useSiderMenu({ path }: Pick<LayoutLoaderData, 'path'>) {
                 collapsedWidth={collapsedWidth}
                 onBreakpoint={onBreakpoint}
                 className='!overflow-auto !h-screen !fixed  !top-16 !bottom-0'
+                ref={ref}
             >
                 <Menu
                     mode='inline'
@@ -151,5 +140,38 @@ function useSiderMenu({ path }: Pick<LayoutLoaderData, 'path'>) {
         contentMargin,
         SiderMenu,
         SidemenuTrigger,
+    };
+}
+
+function useSettings() {
+    const navigate = useNavigate();
+
+    const items = useMemo<Array<MenuItemProps>>(
+        () => [
+            {
+                key: `login`,
+                label: `Login`,
+                onClick: () => void navigate('/login'),
+                tabIndex: '0',
+            },
+        ],
+        [navigate],
+    );
+
+    const Settings = useCallback(() => {
+        return (
+            <Dropdown menu={{ items }} trigger={['click']}>
+                <Button
+                    type='ghost'
+                    size='large'
+                    icon={<SettingOutlined />}
+                    className='flex justify-center items-center text-accent'
+                />
+            </Dropdown>
+        );
+    }, [items]);
+
+    return {
+        Settings,
     };
 }

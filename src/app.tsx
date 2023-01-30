@@ -4,14 +4,17 @@ import Home from './routes/home';
 import Layout, { layoutLoader } from './routes/_layout';
 import TableWithFilters from './routes/table-with-filters';
 import Root from './routes/_root';
+import NotFound from './routes/not-found';
+import Login from './routes/login';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Root />,
+        errorElement: <NotFound />,
         children: [
             {
-                path: '/',
+                path: '',
                 element: <Layout />,
                 loader: layoutLoader,
                 shouldRevalidate: () => true,
@@ -22,6 +25,10 @@ const router = createBrowserRouter([
                         element: <TableWithFilters />,
                     },
                 ],
+            },
+            {
+                path: 'login',
+                element: <Login />,
             },
         ],
     },
