@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply min-h-screen w-full;
+}
+
+*:focus-visible {
+    outline-color: #f7b500 !important;
+}
+
+.text-accent {
+    color: #f7b500;
+}
