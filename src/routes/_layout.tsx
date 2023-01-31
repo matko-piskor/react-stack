@@ -23,12 +23,12 @@ export default function RootRoute() {
     const { SiderMenu, SidemenuTrigger, contentMargin } = useSiderMenu({ path });
     const { Settings } = useSettings();
     return (
-        <Layout className='!min-h-screen !relative'>
+        <Layout className='!relative !min-h-screen'>
             <Header
-                className='!bg-slate-500 !sticky !top-0 !z-50 !h-16 !px-4'
+                className='!sticky !top-0 !z-50 !h-16 !bg-slate-500 !px-4'
                 style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}
             >
-                <nav className='flex gap-2 h-full justify-between items-center'>
+                <nav className='flex h-full items-center justify-between gap-2'>
                     <SidemenuTrigger />
                     <Settings />
                 </nav>
@@ -108,7 +108,7 @@ function useSiderMenu({ path }: Pick<LayoutLoaderData, 'path'>) {
                 breakpoint='lg'
                 collapsedWidth={collapsedWidth}
                 onBreakpoint={onBreakpoint}
-                className='!overflow-auto !h-screen !fixed  !top-16 !bottom-0'
+                className='!fixed !top-16 !bottom-0  !h-screen !overflow-auto'
                 ref={ref}
             >
                 <Menu
@@ -130,7 +130,7 @@ function useSiderMenu({ path }: Pick<LayoutLoaderData, 'path'>) {
                 type='ghost'
                 size='large'
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                className='flex justify-center items-center text-accent'
+                className='text-accent flex items-center justify-center'
                 onClick={toggle}
             />
         );
@@ -165,7 +165,7 @@ function useSettings() {
                     type='ghost'
                     size='large'
                     icon={<SettingOutlined />}
-                    className='flex justify-center items-center text-accent'
+                    className='text-accent flex items-center justify-center'
                 />
             </Dropdown>
         );
