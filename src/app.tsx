@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { layoutLoader } from './routes/_layout';
 import { Dynamic } from './utils/DynamicRoute';
 
+import { env } from './env/schema';
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
     },
 ]);
 
-const colorPrimary = import.meta.env?.VITE_COLOR_PRIMARY ? '#' + import.meta.env?.VITE_COLOR_PRIMARY : 'black';
+const colorPrimary = `#${env.VITE_COLOR_PRIMARY}`;
 
 export default function App() {
     return (
