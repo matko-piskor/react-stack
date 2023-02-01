@@ -1,34 +1,31 @@
+import { lazy } from 'react';
 import { ConfigProvider } from 'antd';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './routes/home';
-import Layout, { layoutLoader } from './routes/_layout';
-import TableWithFilters from './routes/table-with-filters';
-import Root from './routes/_root';
-import NotFound from './routes/not-found';
-import Login from './routes/login';
+import { layoutLoader } from './routes/_layout';
+import { Dynamic } from './utils/DynamicRoute';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root />,
-        errorElement: <NotFound />,
+        element: Dynamic(lazy(() => import('./routes/_root'))),
+        errorElement: Dynamic(lazy(() => import('./routes/not-found'))),
         children: [
             {
                 path: '',
-                element: <Layout />,
+                element: Dynamic(lazy(() => import('./routes/_layout'))),
                 loader: layoutLoader,
                 shouldRevalidate: () => true,
                 children: [
-                    { path: '', element: <Home />, index: true },
+                    { path: '', element: Dynamic(lazy(() => import('./routes/home'))), index: true },
                     {
                         path: 'table-with-filters',
-                        element: <TableWithFilters />,
+                        element: Dynamic(lazy(() => import('./routes/table-with-filters'))),
                     },
                 ],
             },
             {
                 path: 'login',
-                element: <Login />,
+                element: Dynamic(lazy(() => import('./routes/login'))),
             },
         ],
     },
