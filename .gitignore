@@ -25,4 +25,5 @@ dist-ssr
 
 #CUSTOM
 build
+.env
 
