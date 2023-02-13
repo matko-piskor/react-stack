@@ -3,16 +3,7 @@ import { ensureNoEmptySearchParams, processSearchParams } from '~/utils/process-
 import { z } from 'zod';
 
 const schema = z.object({
-    p: z
-        .string()
-        .transform((val) => {
-            const parsed = parseInt(val, 10);
-            if (isNaN(parsed)) {
-                throw new Response('p must be a number', { status: 400 });
-            }
-            return parsed;
-        })
-        .optional(),
+    p: z.number().optional(),
     sd: z.enum(['asc', 'desc']).optional(),
     sf: z.string().optional(),
     arr: z.array(z.string()).optional(),

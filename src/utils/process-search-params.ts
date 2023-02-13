@@ -84,7 +84,8 @@ function mapObj<Key extends string, Value, MappedValue>(
     }, {} as Record<Key, MappedValue>);
 
     if (Object.keys(src).length > 0) {
-        throw new Response(`Unexpected search parameters: ${Object.keys(src).join(', ')}`, { status: 400 });
+        const statusText = `Unexpected search parameters: ${Object.keys(src).join(', ')}`;
+        throw new Response(statusText, { status: 400, statusText });
     }
     return data;
 }
