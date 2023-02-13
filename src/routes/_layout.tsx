@@ -18,7 +18,7 @@ export function layoutLoader(params: LoaderFunctionArgs) {
     return json({ breadcrumbs, path });
 }
 
-export default function RootRoute() {
+export default function LayoutRoute() {
     const { breadcrumbs, path } = useLoaderData() as LayoutLoaderData;
     const { SiderMenu, SidemenuTrigger, contentMargin } = useSiderMenu({ path });
     const { Settings } = useSettings();
