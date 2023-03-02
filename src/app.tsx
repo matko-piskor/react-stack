@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { layoutLoader } from './routes/_layout';
 
 import { env } from './env/schema';
-import Home, { HomeErrorBoundary, homeLoader } from './routes/home';
+import Home, { homeAction, HomeErrorBoundary, homeLoader } from './routes/home';
 import Root from './routes/_root';
 import NotFound from './routes/not-found';
 import Layout from './routes/_layout';
@@ -27,6 +27,7 @@ const router = createBrowserRouter([
                         element: <Home />,
                         index: true,
                         loader: homeLoader,
+                        action: homeAction,
                         errorElement: <HomeErrorBoundary />,
                     },
                     {

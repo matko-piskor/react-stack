@@ -57,6 +57,16 @@ export function ensureNoEmptySearchParams(request: Request) {
     }
 }
 
+export async function ensureNoEmptyFormData(request: Request) {
+    const formData = await request.formData();
+    for (const [key, value] of formData) {
+        if (value === '') {
+            formData.delete(key);
+        }
+    }
+    return formData;
+}
+
 function getShape<Schema extends z.ZodTypeAny>(schema: Schema) {
     let shape = schema;
     while (shape instanceof z.ZodObject || shape instanceof z.ZodEffects) {
