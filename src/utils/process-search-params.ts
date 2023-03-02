@@ -15,8 +15,7 @@ export function processSearchParams<Schema extends z.ZodTypeAny, TransformedSche
     if (transformedSchema) {
         return transformedSchema.parse(data);
     }
-    const searchParameters = schema.parse(data);
-    return searchParameters;
+    return schema.parse(data);
 }
 
 function preprocessSearchParams<Schema extends z.ZodTypeAny>({

@@ -1,7 +1,7 @@
 import { type TableProps } from 'antd';
+import { useRouteLoaderData } from 'react-router-dom';
 import { z, type ZodObject } from 'zod';
 import { type User } from '~/models/user';
-import { useTypedRouteLoaderData, type Maybe } from './extenders';
 
 export const DEFAULT_REDIRECT = '/';
 
@@ -20,12 +20,14 @@ export function safeRedirect(
     return to;
 }
 
+export type Maybe<T> = T | null | undefined;
+
 export function isUser(user: Maybe<User>): user is User {
     return !!user && typeof user === 'object' && typeof user.id === 'string';
 }
 
 export function useOptionalUser(): User | undefined {
-    const data = useTypedRouteLoaderData<{ user: Maybe<User> }>('root');
+    const data = useRouteLoaderData('root') as { user: Maybe<User> };
     if (!data || !isUser(data.user)) {
         return undefined;
     }
