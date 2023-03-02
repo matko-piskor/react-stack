@@ -1,0 +1,27 @@
+{
+	"[typereact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[type]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"javascript.preferences.quoteStyle": "single",
+	"typescript.preferences.quoteStyle": "single",
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.linkedEditing": true,
+	"editor.inlineSuggest.enabled": true,
+	"prettier.useTabs": true,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.stickyScroll.enabled": true,
+	"playwright.reuseBrowser": true,
+    "editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": true,
+	},
+}
