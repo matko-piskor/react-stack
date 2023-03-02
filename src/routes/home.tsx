@@ -10,6 +10,7 @@ import {
 import { ensureNoEmptyFormData, ensureNoEmptySearchParams, processSearchParams } from '~/utils/process-search-params';
 import { z } from 'zod';
 import { createContext, useContext, useMemo } from 'react';
+import { Button } from '~/components/button';
 
 const schema = z.object({
     p: z.number().nonnegative().optional(),
@@ -102,6 +103,7 @@ function Home() {
     const { searchParams } = useHomeContext();
     return (
         <div className='m-auto p-8'>
+            <Button>Test</Button>
             <div>
                 <h1 className='block text-lg text-red-700'>Home</h1>
             </div>
