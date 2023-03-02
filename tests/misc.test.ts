@@ -1,4 +1,4 @@
-import { DEFAULT_REDIRECT, _isUser, safeRedirect } from '~/utils/misc';
+import { DEFAULT_REDIRECT, isUser, safeRedirect } from '~/utils/misc';
 
 test('safeRedirect', () => {
     expect(safeRedirect('/login')).toBe('/login');
@@ -12,6 +12,6 @@ test('safeRedirect', () => {
 });
 
 test('isUser', () => {
-    expect(_isUser({ id: '1' })).toBe(true);
-    expect(_isUser({ id: 1 })).toBe(false);
+    expect(isUser({ id: '1' })).toBe(true);
+    expect(isUser({ id: 1 })).toBe(false);
 });

@@ -1,5 +1,6 @@
-import { json, type LoaderFunctionArgs, Outlet, redirect, ScrollRestoration } from 'react-router-dom';
+import { json, Outlet, ScrollRestoration, type LoaderFunctionArgs } from 'react-router-dom';
 import { getUserById } from '~/models/user';
+import { safeRedirect } from '~/utils/misc';
 
 // Replace these with your own authentication library
 const authenticator = {
@@ -7,9 +8,9 @@ const authenticator = {
         // This is where you would check if the user is authenticated.
         return 'some-user-id';
     },
-    logout: async (_request: Request, _options: { redirectTo: string }) => {
+    logout: async (_request: Request, options: { redirectTo: string }) => {
         // This is where you would log the user out.
-        redirect(_options.redirectTo);
+        safeRedirect(options.redirectTo);
     },
 };
 

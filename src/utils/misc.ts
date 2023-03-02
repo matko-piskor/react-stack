@@ -1,17 +1,10 @@
 import { type TableProps } from 'antd';
-import { useRouteLoaderData } from 'react-router-dom';
 import { z, type ZodObject } from 'zod';
 import { type User } from '~/models/user';
+import { useTypedRouteLoaderData, type Maybe } from './extenders';
 
 export const DEFAULT_REDIRECT = '/';
 
-/**
- * This should be used any time the redirect path is user-provided
- * (Like the query string on our login/signup pages). This avoids
- * open-redirect vulnerabilities.
- * @param {string} to The redirect destination
- * @param {string} defaultRedirect The redirect to use if the to is unsafe.
- */
 export function safeRedirect(
     to: FormDataEntryValue | string | null | undefined,
     defaultRedirect: string = DEFAULT_REDIRECT,
@@ -27,14 +20,13 @@ export function safeRedirect(
     return to;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function _isUser(user: any): user is User {
+export function isUser(user: Maybe<User>): user is User {
     return !!user && typeof user === 'object' && typeof user.id === 'string';
 }
 
 export function useOptionalUser(): User | undefined {
-    const data = useRouteLoaderData('root') as { user: User };
-    if (!data || !_isUser(data.user)) {
+    const data = useTypedRouteLoaderData<{ user: Maybe<User> }>('root');
+    if (!data || !isUser(data.user)) {
         return undefined;
     }
     return data.user;
