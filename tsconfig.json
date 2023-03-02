@@ -24,7 +24,7 @@
             "@/*": ["tests/*"]
         }
     },
-    "include": ["**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
-    "exclude": ["node_modules"],
+    "include": ["**/*.ts", "**/*.tsx",  "**/*.mjs"],
+    "exclude": ["node_modules", "**/*.cjs"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

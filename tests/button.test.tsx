@@ -1,5 +1,5 @@
-import { Button } from '../src/components/button';
 import { render, screen } from '@testing-library/react';
+import { Button } from '~/components/button';
 
 test('Button should render', () => {
     render(<Button>Test</Button>);

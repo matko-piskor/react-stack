@@ -3,7 +3,7 @@
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { alias } from './alias';
+import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,12 +15,15 @@ export default defineConfig({
         outDir: 'build',
     },
     resolve: {
-        alias,
+        alias: {
+            '~': r('./src'),
+            '@': r('./tests'),
+        },
     },
     test: {
         include: ['./src/**/*.test.{ts,tsx}'],
         globals: true,
-        environment: 'jsdom',
+        environment: 'happy-dom',
         setupFiles: ['./tests/utils/test-setup.ts'],
         // globalSetup: ['./tests/utils/test-globals.ts'],
         // you might want to disable it, if you don't have tests that rely on CSS
@@ -28,3 +31,7 @@ export default defineConfig({
         css: true,
     },
 });
+
+function r(p: string) {
+    return resolve(__dirname, p);
+}

@@ -1,11 +1,11 @@
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Table } from 'antd';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import {
+    schema as dataSchema,
     useMockTableWithFilters,
     type Schema as DataSchema,
-    schema as dataSchema,
 } from '~/mocks/table-with-filters.mock';
 import { schemaToColumns } from '~/utils/misc';
 

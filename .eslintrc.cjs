@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-undef
 module.exports = {
     env: {
         browser: true,
@@ -36,6 +35,7 @@ module.exports = {
                 fixStyle: 'inline-type-imports',
             },
         ],
+        'no-undef': 'off',
     },
     // we're using vitest which has a very similar API to jest
     // (so the linting plugins work nicely), but it means we have to explicitly
