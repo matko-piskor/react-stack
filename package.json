@@ -10,8 +10,8 @@
         "preview": "vite preview",
         "test": "vitest",
         "test:run": "vitest --run",
-        "format": "prettier --write .",
         "coverage": "vitest --coverage",
+        "format": "prettier --write .",
         "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
         "lint:fix": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
         "typecheck": "tsc"
