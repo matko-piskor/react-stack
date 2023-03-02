@@ -11,6 +11,7 @@
         "test": "vitest",
         "test:run": "vitest --run",
         "format": "prettier --write .",
+        "coverage": "vitest --coverage",
         "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
         "lint:fix": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
         "typecheck": "tsc"
@@ -29,16 +30,17 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^7.6.0",
-        "@testing-library/dom": "^8.20.0",
+        "@testing-library/dom": "^9.0.0",
         "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^13.4.0",
+        "@testing-library/react": "^14.0.0",
         "@testing-library/user-event": "^14.4.3",
         "@types/eslint": "^8.4.10",
         "@types/react": "^18.0.26",
         "@types/react-dom": "^18.0.9",
         "@typescript-eslint/eslint-plugin": "^5.49.0",
         "@vitejs/plugin-react": "^3.0.0",
-        "@vitest/ui": "^0.27.2",
+        "@vitest/coverage-c8": "^0.29.2",
+        "@vitest/ui": "^0.29.2",
         "autoprefixer": "^10.4.13",
         "eslint": "^8.32.0",
         "eslint-config-prettier": "^8.6.0",
@@ -53,6 +55,6 @@
         "typescript": "^4.9.4",
         "vite": "^4.0.4",
         "vite-tsconfig-paths": "^4.0.5",
-        "vitest": "^0.27.2"
+        "vitest": "^0.29.2"
     }
 }
