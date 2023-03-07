@@ -1,6 +1,6 @@
-import { z } from 'zod';
 import { test } from 'vitest';
-import { processSearchParams } from '~/utils/process-search-params';
+import { z } from 'zod';
+import { ensureNoEmptyFormData, ensureNoEmptySearchParams, processSearchParams } from '~/utils/process-search-params';
 
 // test processSearchParams
 test('process search params with string required params', async () => {
@@ -97,5 +97,68 @@ test("process search params with params of types 'number, array, enum'", () => {
         baz: 1,
         qux: ['quu', 'quu2'],
         corge: 'grault',
+    });
+});
+
+test('process search params with transformed schema', () => {
+    const request = new Request('https://example.com/?foo=bar&baz=1&qux=quu&qux=quu2&corge=grault');
+    const schema = z.object({
+        foo: z.string(),
+        baz: z.number(),
+        qux: z.array(z.string()),
+        corge: z.enum(['grault', 'garply']),
+    });
+
+    const transformedSchema = schema.transform((args) => {
+        return {
+            ...args,
+            corge: args.corge.toUpperCase(),
+        };
+    });
+
+    const searchParams = processSearchParams({
+        request,
+        schema,
+        transformedSchema,
+    });
+
+    console.log(searchParams);
+
+    expect(searchParams).toEqual({
+        foo: 'bar',
+        baz: 1,
+        qux: ['quu', 'quu2'],
+        corge: 'GRAULT',
+    });
+});
+
+test.fails('ensure no empty search params', () => {
+    const request = new Request('https://example.com/?foo=bar&baz=1&qux=quu&qux=quu2&corge=');
+
+    const searchParams = ensureNoEmptySearchParams(request);
+
+    expect(searchParams).toEqual({
+        foo: 'bar',
+        baz: 1,
+        qux: ['quu', 'quu2'],
+        corge: 'grault',
+    });
+});
+
+test('ensure no empty form data', async () => {
+    const request = new Request('https://example.com/', {
+        method: 'POST',
+        body: new URLSearchParams({
+            foo: 'bar',
+            baz: '1',
+            corge: '',
+        }),
+    });
+
+    const formData = await ensureNoEmptyFormData(request);
+
+    expect(Object.fromEntries(formData)).toEqual({
+        foo: 'bar',
+        baz: '1',
     });
 });
