@@ -3,12 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { layoutLoader } from './routes/_layout';
 
 import { env } from './env/schema';
-import Home, { homeAction, HomeErrorBoundary, homeLoader } from './routes/home';
-import Root from './routes/_root';
-import NotFound from './routes/not-found';
-import Layout from './routes/_layout';
-import TableWithFilters from './routes/table-with-filters';
+import Home, { HomeErrorBoundary } from './routes/home';
 import Login from './routes/login';
+import NotFound from './routes/not-found';
+import TableWithFilters from './routes/table-with-filters';
+import Layout from './routes/_layout';
+import Root from './routes/_root';
 
 const router = createBrowserRouter([
     {
@@ -26,8 +26,6 @@ const router = createBrowserRouter([
                         path: '',
                         element: <Home />,
                         index: true,
-                        loader: homeLoader,
-                        action: homeAction,
                         errorElement: <HomeErrorBoundary />,
                     },
                     {
