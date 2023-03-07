@@ -57,7 +57,7 @@ export default function TableWithFiltersRoute() {
                             <label htmlFor='age'>Age</label>
                             <input
                                 type='number'
-                                {...register('age', { valueAsNumber: true })}
+                                {...register('age', { setValueAs: (v) => (v === '' ? undefined : Number(v)) })}
                                 className='h-8 w-full'
                                 aria-invalid={errors.age ? 'true' : 'false'}
                             />

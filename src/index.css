@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    @apply min-h-screen w-full;
+html,
+body,
+#root {
+    @apply h-[100svh] w-full;
 }
 
 *:focus-visible {

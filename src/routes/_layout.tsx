@@ -22,13 +22,17 @@ export default function LayoutRoute() {
     const { breadcrumbs, path } = useLoaderData() as LayoutLoaderData;
     const { SiderMenu, SidemenuTrigger, contentMargin } = useSiderMenu({ path });
     const { Settings } = useSettings();
+    const breadbrumbsItems = useMemo(
+        () => breadcrumbs.map((b) => ({ key: b.path, title: <Link to={b.path}>{b.title}</Link> })),
+        [breadcrumbs],
+    );
     return (
-        <Layout className='!relative !min-h-screen'>
+        <Layout className='!relative min-h-full'>
             <Header
-                className='!sticky !top-0 !z-50 !h-16 !bg-slate-500 !px-4'
+                className='!sticky !top-0 !z-50 !h-16 !bg-primary !px-4'
                 style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}
             >
-                <nav className='flex h-full items-center justify-between gap-2'>
+                <nav className='flex  items-center justify-between gap-2'>
                     <SidemenuTrigger />
                     <Settings />
                 </nav>
@@ -36,14 +40,8 @@ export default function LayoutRoute() {
             <Layout>
                 <SiderMenu />
                 <Layout className='px-8 py-4' style={{ marginLeft: contentMargin }}>
-                    <Breadcrumb>
-                        {breadcrumbs.map((breadcrumb, index) => (
-                            <Breadcrumb.Item key={index}>
-                                <Link to={breadcrumb.path}>{breadcrumb.title}</Link>
-                            </Breadcrumb.Item>
-                        ))}
-                    </Breadcrumb>
-                    <Content className='h-[2000px]'>
+                    <Breadcrumb items={breadbrumbsItems} />
+                    <Content>
                         <Outlet />
                     </Content>
                 </Layout>
@@ -90,9 +88,11 @@ function useSiderMenu({ path }: Pick<LayoutLoaderData, 'path'>) {
             {
                 key: `table-with-filters`,
                 icon: <FileSearchOutlined />,
-                label: `Table with filters`,
+                label: 'Table with filters',
                 tabIndex: '0',
                 onClick: () => void navigate('/table-with-filters'),
+                className: 'text-primary text-semibold truncate',
+                title: 'Table with filters',
             },
         ],
         [navigate],
