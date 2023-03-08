@@ -32,7 +32,7 @@ export default function LayoutRoute() {
                 className='!sticky !top-0 !z-50 !h-16 !bg-primary !px-4'
                 style={{ position: 'sticky', top: 0, zIndex: 1, width: '100%' }}
             >
-                <nav className='flex  items-center justify-between gap-2'>
+                <nav className='flex h-full items-center justify-between gap-2'>
                     <SidemenuTrigger />
                     <Settings />
                 </nav>
