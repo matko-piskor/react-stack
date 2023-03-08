@@ -6,7 +6,7 @@ export default function HomeRoute() {
     return (
         <div className='flex flex-col items-center py-16 px-8'>
             <h1 className='text-lg text-primary'>
-                Template React stack with all neccessary (and optional) depenedencies
+                Template React stack with all neccessary (and optional) depenedencies Powered by Vite
             </h1>
             <div className='p-8'>
                 <Image src='/biss-logo.png' />
